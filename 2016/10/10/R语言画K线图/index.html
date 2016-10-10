@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>R语言画K线图 | 外汇交易</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="k线图是用的最多的一种图，可以把价格很好的呈现出来。
+获取数据利用quantmod包，从互联网下载股票数据
+123456789library(quantmod)stock.symbol &amp;lt;- &amp;quot;AAPL&amp;quot;from &amp;lt;- &amp;quot;2016-01-01&amp;quot;stock &amp;lt;- getSymbols(stock.symbol,from=from,env=en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言画K线图">
+<meta property="og:url" content="http://waihui.trade/blog/2016/10/10/R语言画K线图/index.html">
+<meta property="og:site_name" content="外汇交易">
+<meta property="og:description" content="k线图是用的最多的一种图，可以把价格很好的呈现出来。
+获取数据利用quantmod包，从互联网下载股票数据
+123456789library(quantmod)stock.symbol &amp;lt;- &amp;quot;AAPL&amp;quot;from &amp;lt;- &amp;quot;2016-01-01&amp;quot;stock &amp;lt;- getSymbols(stock.symbol,from=from,env=en">
+<meta property="og:updated_time" content="2016-10-10T07:02:22.650Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R语言画K线图">
+<meta name="twitter:description" content="k线图是用的最多的一种图，可以把价格很好的呈现出来。
+获取数据利用quantmod包，从互联网下载股票数据
+123456789library(quantmod)stock.symbol &amp;lt;- &amp;quot;AAPL&amp;quot;from &amp;lt;- &amp;quot;2016-01-01&amp;quot;stock &amp;lt;- getSymbols(stock.symbol,from=from,env=en">
+  
+    <link rel="alternate" href="/atom.xml" title="外汇交易" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">外汇交易</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://waihui.trade/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-R语言画K线图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/10/10/R语言画K线图/" class="article-date">
+  <time datetime="2016-10-10T06:48:36.000Z" itemprop="datePublished">2016-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      R语言画K线图
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>k线图是用的最多的一种图，可以把价格很好的呈现出来。</p>
+<h1 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h1><p>利用quantmod包，从互联网下载股票数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">library(quantmod)</div><div class="line">stock.symbol &lt;- &quot;AAPL&quot;</div><div class="line">from &lt;- &quot;2016-01-01&quot;</div><div class="line"></div><div class="line">stock &lt;- getSymbols(stock.symbol,from=from,env=environment(),auto.assign=FALSE)</div><div class="line">head(stock)</div><div class="line"></div><div class="line">names(stock) &lt;- c(&quot;open&quot;,&quot;high&quot;,&quot;low&quot;,&quot;close&quot;,&quot;volume&quot;,&quot;adjusted&quot;)</div><div class="line">head(stock)</div></pre></td></tr></table></figure>
+<h2 id="简单的k线图"><a href="#简单的k线图" class="headerlink" title="简单的k线图"></a>简单的k线图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chartSeries(stock)</div><div class="line">addMACD()</div></pre></td></tr></table></figure>
+<p>非常简单的2个函数，就可以实现股票数据的可视化。<br>但是，这个功能是封装好的通用的函数，如果我们要自定策略模型，就需要自己写代码来实现。<br>比如，自定义的支持量化机(SVM)分类器模型。</p>
+<h2 id="自定义均线图"><a href="#自定义均线图" class="headerlink" title="自定义均线图"></a>自定义均线图</h2><p>利用ggplot2中关于绘制boxplot的方法，可以画出蜡烛图。把box的lower设为开盘价，upper设为收盘价，middle设为NA，上须取成最高价，下须取成最低价。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">library(ggplot2)</div><div class="line">stock &lt;- data.frame(stock)</div><div class="line">stock$date &lt;- rownames(stock)</div><div class="line">stock$candleUp &lt;- pmax(stock$open, stock$close)</div><div class="line">stock$candleDown &lt;- pmin(stock$open, stock$close)</div><div class="line">stock$candleMiddle &lt;- NA</div><div class="line">stock$color &lt;- ifelse(stock$close&lt;stock$open,&quot;green&quot;,&quot;red&quot;)</div><div class="line"></div><div class="line">head(stock)</div><div class="line"></div><div class="line"></div><div class="line">p &lt;- ggplot(stock)</div><div class="line"></div><div class="line">p + geom_boxplot(aes(lower=candleDown, middle=candleMiddle, upper=candleUp, x=date, ymax=high, ymin=low))</div><div class="line"></div><div class="line">p + scale_fill_manual(values=c(&apos;green&apos;,&apos;red&apos;))+guides(fill=FALSE)</div><div class="line"></div><div class="line">p</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://waihui.trade/blog/blog/2016/10/10/R语言画K线图/" data-id="ciu3p8cmv0000www3054nb8ww" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2016/10/10/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2016/10/10/R语言画K线图/">R语言画K线图</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2016/10/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 August<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
